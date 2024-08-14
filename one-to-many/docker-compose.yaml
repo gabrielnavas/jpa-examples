@@ -1,0 +1,9 @@
+services:
+  postgres:
+    container_name: one-to-many-jpa-example
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5436:5432"
