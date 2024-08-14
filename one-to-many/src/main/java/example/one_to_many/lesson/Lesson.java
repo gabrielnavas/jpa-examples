@@ -9,21 +9,24 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "lessons")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Entity // Marca a classe como uma entidade JPA
+@Table(name = "lessons") // Especifica o nome da tabela no banco de dados
+@Getter // Gera automaticamente os métodos getter para todos os campos
+@Setter // Gera automaticamente os métodos setter para todos os campos
+@NoArgsConstructor // Gera um construtor sem argumentos
+@AllArgsConstructor // Gera um construtor com argumentos para todos os campos
 public class Lesson {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+    @Id // Indica que o campo 'id' é a chave primária da entidade
+    @GeneratedValue(strategy = GenerationType.UUID) // Gera automaticamente um UUID para o campo 'id'
     private UUID id;
 
     @Column(length = 150, nullable = false)
+    // Define a coluna com tamanho máximo de 150 caracteres e não permite valor nulo
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
+    @ManyToOne // Define uma relação Many-to-One com a entidade 'Course'
+    @JoinColumn(name = "course_id") // Especifica a coluna 'course_id' como a chave estrangeira
     private Course course;
 }
