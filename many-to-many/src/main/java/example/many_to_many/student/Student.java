@@ -1,32 +1,32 @@
-package example.one_to_one.teaching_material;
+package example.many_to_many.student;
 
-import example.one_to_one.course.Course;
+
+import example.many_to_many.class_room.ClassRoom;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
-
 @Entity
-@Table // Se não for especificado, o nome da tabela será o mesmo da classe (em minúsculas).
+@Table(name = "students") // Especifica o nome da tabela no banco de dados.
 @Getter // Cria métodos getter para todos os campos da classe.
 @Setter // Cria métodos setter para todos os campos da classe.
 @NoArgsConstructor // Cria um construtor sem argumentos.
 @AllArgsConstructor // Cria um construtor com argumentos para todos os campos.
-public class TeachingMaterial {
+public class Student {
 
     @Id // Indica que o campo `id` é a chave primária da entidade.
     @GeneratedValue(strategy = GenerationType.UUID) // Define a geração do valor da chave primária como UUID.
     private UUID id;
 
-    @Column(nullable = false, length = 150)
+    @Column(length = 150, nullable = false)
     // Define a coluna `name` com comprimento máximo de 150 caracteres e não nula.
     private String name;
 
-    @OneToOne(mappedBy = "teachingMaterial")
-    // Define uma relação `OneToOne` com a entidade `Course`, sendo que `Course` é o dono da relação.
-    private Course course; // A entidade `Course` é responsável por mapear a relação.
+    @OneToMany(mappedBy = "student")
+    private List<ClassRoom> classRooms;
 }

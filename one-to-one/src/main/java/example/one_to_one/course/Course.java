@@ -21,9 +21,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.UUID) // Define a geração do valor da chave primária como UUID.
     private UUID id;
 
-    @Column(length = 150, nullable = false) // Define a coluna `name` com comprimento máximo de 150 caracteres e não nula.
+    @Column(length = 150, nullable = false)
+    // Define a coluna `name` com comprimento máximo de 150 caracteres e não nula.
     private String name;
 
-    @OneToOne(mappedBy = "course") // Define uma relação `OneToOne` com a entidade `TeachingMaterial`.
-    private TeachingMaterial teachingMaterial; // A entidade `TeachingMaterial` é responsável por mapear a relação.
+    @OneToOne // Define uma relação `OneToOne` com a entidade `TeachingMaterial`.
+    @JoinColumn(name = "teaching_material_id")
+    // Especifica a coluna `teaching_material_id` como chave estrangeira para a tabela `TeachingMaterial`.
+    private TeachingMaterial teachingMaterial; // A entidade `TeachingMaterial` é referenciada pela chave estrangeira `teaching_material_id`.
 }

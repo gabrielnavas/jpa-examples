@@ -1,21 +1,15 @@
-package example.one_to_one.course;
+package example.many_to_many.course;
 
-import example.one_to_one.teaching_material.TeachingMaterial;
-import example.one_to_one.teaching_material.TeachingMaterialWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class CourseWrapper {
-
-    private final TeachingMaterialWrapper teachingMaterialWrapper;
-
-    public CourseResponse map(Course course, TeachingMaterial teachingMaterial) {
+    public CourseResponse map(Course course) {
         return CourseResponse.builder()
                 .id(course.getId())
                 .name(course.getName())
-                .teachingMaterial(teachingMaterialWrapper.map(teachingMaterial))
                 .build();
     }
 
